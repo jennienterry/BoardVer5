@@ -10,7 +10,7 @@
 	display: none;
 }
 </style>
-<title>로그인</title>
+<title>로그인하쟈</title>
 </head>
 <body>
 	<div class="err">${errMsg}</div>
