@@ -34,7 +34,7 @@ public class UserJoinServlet extends HttpServlet {
 		vo.setUnm(unm);
 		vo.setGender(gender);
 		
-		int joinuser = UserDAO.joinUser(vo);
+		UserDAO.joinUser(vo);
 		
 		response.sendRedirect("/user/login");
 	

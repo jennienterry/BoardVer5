@@ -6,6 +6,9 @@
 <head>
 <meta charset="UTF-8">
 <title>${requestScope.param.title}</title>
+<style>
+.hidden{display: none;}
+</style>
 <script defer src="/res/js/boardDetail.js"></script>
 </head>
 <body>
@@ -18,26 +21,34 @@
 	<div>작성자 : ${vo.unm}</div>
 	<div>작성일시 : ${vo.regdt}</div>
 	<div>${vo.ctnt}</div>
-
-	<c:if test="${loginUser.iuser == vo.iuser}">
-		<div>
-			<form action="delete" method="post">
-				<input type="hidden" name="iboard" value="${param.iboard}">
-				<input type="hidden" name="iuser" value="${vo.iuser}">
-				<input type="submit" value="삭제">
-			</form>
 		<!-- 누구를 삭제하고 수정할지 생각하기 -->
-<!-- 	<a href="delete?iboard=${param.iboard}"><button>삭제</button></a> --> 
+		
+	<c:if test="${loginUser.iuser == vo.iuser}">
 		<a href="mod?iboard=${param.iboard}"><button>수정</button></a>
-		</div>
+		<a href="delete?iboard=${param.iboard}"><button>삭제</button></a>
 	</c:if>
-
-	<div>
-		<form action="cmt" method="post">
-			<input type="hidden" name="iboard" value="${param.iboard}">
-			<div>
+	<h3>댓글</h3>
+		<div>
+			<form id="insFrm" action="cmt" method="post">	
+			<input type="hidden" name="icmt" value="0">
+				<input type="hidden" name="iboard" value="${param.iboard}">
+				<!-- <input type="hidden" name="iuser" value="${vo.iuser}"> -->
+				<div>
 				<textarea name="cmt" placeholder="댓글내용"></textarea>
 				<input type="submit" value="댓글작성">
+				</div>
+			</form>
+	
+		</div>
+
+	<div>
+		<form id="updFrm" action="cmt" method="post" class="hidden">
+			<input type="hidden" name="icmt" value="0">
+			<input type="hidden" name="iboard" value="${param.iboard}">
+			<div>
+				<textarea name="cmt" placeholder="댓글수정"></textarea>
+				<input type="submit" value="댓글수정">
+				<input type="button" value="수정취소" onclick="showInsFrm()">
 			</div>
 		</form>
 	</div>
@@ -57,7 +68,7 @@
 				<td>${i.regdate}</td>
 				<td>		<!-- sessionScope-->
 				<c:if test="${loginUser.iuser == i.iuser}">
-				<input type="button" value="수정">
+				<input type="button" value="수정" onclick="updCmt(${param.iboard}, ${i.icmt}, '${i.cmt.trim()}')">
 				<button onclick="delCmt(${param.iboard}, ${i.icmt})">삭제</button>
 				</c:if>
 				</td>

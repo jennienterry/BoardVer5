@@ -4,10 +4,16 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<script defer src="/res/js/userLogin.js"></script>
+<style>
+.err {
+	display: none;
+}
+</style>
 <title>로그인</title>
 </head>
 <body>
-	<div>${errMsg}</div>
+	<div class="err">${errMsg}</div>
 	<div>		<!-- servlet이름 -->
 		<form action="/user/login" method="post">
 			<div>

@@ -18,7 +18,10 @@ public class BoardDeleteServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int iboard = MyUtils.getParamInt("iboard",request);
 		int loginPk = MyUtils.getLoginUserPk(request);
-		int boardIuser = MyUtils.getParamInt("iuser", request);
+		
+		BoardVO bvo = new BoardVO();
+		bvo.setIboard(iboard);
+		int boardIuser = BoardDAO.selBoard(bvo).getIboard();
 		if(loginPk != boardIuser) {
 			response.sendRedirect("/board/list");
 			return;
