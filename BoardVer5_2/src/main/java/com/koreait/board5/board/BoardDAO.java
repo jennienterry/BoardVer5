@@ -85,15 +85,23 @@ public class BoardDAO {
 		ResultSet rs = null;
 		
 		String sql = "SELECT A.iuser, A.iboard, A.title, A.regdt, A.ctnt, B.unm "
+				   + " , if(C.iboard IS NULL, 0, 1) AS isFav "
 				   + "FROM t_board A "
 				   + "LEFT JOIN t_user B "
 				   + "ON A.iuser = B.iuser "
-				   + "WHERE iboard = ?";
+				   
+				   + "LEFT JOIN t_board_fav C "
+				   + "ON A.iboard = C.iboard "
+				   + "AND C.iuser = ? "
+				   
+				   + "WHERE A.iboard = ?";
 		
 		try {
 			con = DBUtils.getCon();
 			ps = con.prepareStatement(sql);
-			ps.setInt(1, param.getIboard());
+			ps.setInt(1, param.getIuser()); //로그인 user PK
+			ps.setInt(2, param.getIboard());
+			
 			rs = ps.executeQuery();
 			
 			if(rs.next()) {
@@ -104,6 +112,7 @@ public class BoardDAO {
 			result.setUnm(rs.getString("unm"));
 			result.setIuser(rs.getInt("iuser"));
 			result.setCtnt(rs.getString("ctnt"));
+			result.setIsFav(rs.getInt("isFav"));
 			
 		}  
 		} catch (Exception e) {

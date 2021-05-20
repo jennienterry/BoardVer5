@@ -6,11 +6,15 @@
 <head>
 <meta charset="UTF-8">
 <title>${requestScope.param.title}</title>
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 <style>
 .hidden{display: none;}
+.fa-heart {color:#B3B2FA;}
 </style>
 <script defer src="/res/js/boardDetail.js"></script>
 </head>
+
 <body>
 	<h1>디테일</h1>
 	<div>
@@ -18,11 +22,17 @@
 	</div>
 	<div>글번호 : ${param.iboard}</div>
 	<div>제목 : ${vo.title}</div>
+	<c:if test="${vo.isFav eq 0}">
+	<a href="fav?iboard=${param.iboard}&fav=1"><i class="far fa-heart"></i></a>
+	</c:if>
+	<c:if test="${vo.isFav == 1}">
+	<a href="fav?iboard=${param.iboard}&fav=0"><i class="fas fa-heart"></i></a>
+	</c:if>
 	<div>작성자 : ${vo.unm}</div>
 	<div>작성일시 : ${vo.regdt}</div>
 	<div>${vo.ctnt}</div>
-		<!-- 누구를 삭제하고 수정할지 생각하기 -->
-		
+	
+		<!-- 누구를 삭제하고 수정할지 생각하기 -->	
 	<c:if test="${loginUser.iuser == vo.iuser}">
 		<a href="mod?iboard=${param.iboard}"><button>수정</button></a>
 		<a href="delete?iboard=${param.iboard}"><button>삭제</button></a>
@@ -38,7 +48,6 @@
 				<input type="submit" value="댓글작성">
 				</div>
 			</form>
-	
 		</div>
 
 	<div>

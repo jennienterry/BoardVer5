@@ -36,15 +36,14 @@ public class CmtServlet extends HttpServlet {
 		int iuser = MyUtils.getLoginUserPk(request);
 		
 		CmtVO param = new CmtVO();
-		param.setIboard(iboard);
 		param.setCmt(cmt);	
-		param.setIuser(iuser);
+		param.setIuser(iuser); //이사람이 그 사람이 맞는지 확인하기 위함
 		
-		if(icmt != 0) {
-			param.setIcmt(icmt);
+		if(icmt != 0) { // 수정
+			param.setIcmt(icmt); //icmt값으로 iboard를 알 수 있음
 			CmtDAO.updCmt(param);
 		}else {
-			param.setIboard(iboard); //등록일 때는 iboard값이 필요
+			param.setIboard(iboard); //등록 일 때는 iboard값이 필요
 			CmtDAO.insCmt(param);
 		}
 		

@@ -20,9 +20,14 @@ public class BoardDetailServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		int iboard = MyUtils.getParamInt("iboard", request);
-		BoardVO vo = new BoardVO();
-		vo.setIboard(iboard);
-		vo = BoardDAO.selBoard(vo);
+		int iuser = MyUtils.getLoginUserPk(request);
+		
+		BoardVO param = new BoardVO();
+		param.setIboard(iboard);
+		param.setIuser(iuser);
+		
+		
+		BoardVO vo = BoardDAO.selBoard(param);
 		List<CmtVO> cmtlist = CmtDAO.selCmtList(vo);
 		request.setAttribute("cmtList", cmtlist);
 		request.setAttribute("vo", vo);
