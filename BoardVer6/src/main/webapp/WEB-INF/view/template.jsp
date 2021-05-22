@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Login</title>
+<title> ${requestScope.title}</title>
 </head>
 <body>
-	
+	<header></header>
 </body>
 </html>
