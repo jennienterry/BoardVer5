@@ -6,6 +6,7 @@ var updFrmElem = document.querySelector('#updFrm');
 function delCmt(iboard, icmt) {
 	console.log(`iboard: ${iboard}, icmt: ${icmt}`)
 	//``EL식 아님, javascript문법임
+	// " " + 와 같은 효과
 	if (confirm('삭제하시겠습니까?')) {
 		location.href = `/board/cmt?icmt=${icmt}&iboard=${iboard}`;
 	}

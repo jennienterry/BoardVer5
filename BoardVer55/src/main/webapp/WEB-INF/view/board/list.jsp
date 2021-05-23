@@ -28,11 +28,5 @@
 			</tr>
 		</c:forEach>
 	</table>
-		
-		<script>
-		function moveToDetail(iboard){
-			location.href="/board/detail?iboard=" + iboard
-		}
-		</script>
 </body>
 </html>

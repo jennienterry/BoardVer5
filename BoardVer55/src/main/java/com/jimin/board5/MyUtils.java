@@ -31,6 +31,7 @@ public class MyUtils {
 	}
 	
 	public static UserVO getloginUser(HttpServletRequest request) {
+		if(request==null) {return null;}
 		HttpSession hs = request.getSession();
 		UserVO loginUser = (UserVO) hs.getAttribute("loginUser");
 		return loginUser;
