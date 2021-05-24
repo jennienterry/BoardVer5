@@ -33,6 +33,7 @@ public class BoardModServlet extends HttpServlet {
 		int iboard = MyUtils.getParamInt("iboard", request);
 		String title = request.getParameter("title");
 		String ctnt = request.getParameter("ctnt");
+		
 		BoardVO vo = new BoardVO();
 		vo.setIboard(iboard);
 		vo.setTitle(title);

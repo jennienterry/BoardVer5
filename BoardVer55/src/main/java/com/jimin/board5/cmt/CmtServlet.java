@@ -35,6 +35,15 @@ public class CmtServlet extends HttpServlet {
 		CmtVO param = new CmtVO();
 		param.setIcmt(icmt);
 		param.setIuser(iuser);
+		
+		if(icmt != 0) {
+			param.setIcmt(icmt);
+			CmtDAO.updCmt(param);
+		}else {param.setIboard(iboard);
+			CmtDAO.insCmt(param);
+		}
+		
+		response.sendRedirect("detail?iboard" + iboard);
 	}
 
 }

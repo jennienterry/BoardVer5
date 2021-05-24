@@ -1,0 +1,23 @@
+@charset "UTF-8";
+
+html,body, ul {
+	margin:0;
+	padding:0;
+}
+
+header nav {
+	height:50px;
+	background-color:silver;
+}
+
+header nav ul {
+	display:flex; /* 옆으로 나열되도록 */
+	height:100%;
+	align-content:center;
+	list-style: none;
+}
+
+header nav ul li {
+	margin-left:20px;
+		
+}
