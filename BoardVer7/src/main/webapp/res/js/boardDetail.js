@@ -1,5 +1,6 @@
+var cmtFrmElem = document.querySelector('#cmtFrm');
+
 function regCmt(){
-	var cmtFrmElem = document.querySelector('#cmtFrm');
 	var cmtVal = cmtFrmElem.cmt.value;	//속성명으로 접근(id나 name)
 
 	var param = {
@@ -28,8 +29,25 @@ function regAjax(param){
 			alert('등록 실패');
 			break;
 			case 1:
+			cmtFrmElem.cmt.value = '';
 			alert('등록 완료');
 			break;
 		}
 	});
 }
+
+//서버에세 댓글 리스트 자료 달라고 요청하는 함수
+function getListAjax(){
+	var iboard = cmtFrmElem.dataset.iboard;
+	
+	fetch('cmtInsSel?iboard=' + iboard)
+	.then(function(res){
+		return res.json();
+	})
+	.then(function(myJson){
+		console.log(myJson);
+	});
+	
+}
+
+getListAjax(); //이 파일이 임포트되면 함수 1회 호출

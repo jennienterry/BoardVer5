@@ -77,7 +77,7 @@ public class BoardDAO {
 		ResultSet rs = null;
 		
 		String sql = "SELECT "
-				   + "A.title, A. ctnt, A.iuser, A.regdt "
+				   + "A.iboard, A.title, A. ctnt, A.iuser, A.regdt "
 				   + ", B.unm AS writerNm "
 				   + "FROM t_board A "
 				   + "INNER JOIN t_user B "
