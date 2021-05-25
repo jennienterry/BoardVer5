@@ -18,10 +18,10 @@ public class UserLogoutServlet extends HttpServlet {
 		HttpSession hs = request.getSession();
 		hs.invalidate();
 		
-		String referer = request.getHeader("referer");
+		String referer = request.getHeader("referer"); //접속경로
 		System.out.println("referer : " + referer);
 		
-		response.sendRedirect(referer);
+		response.sendRedirect(referer); // 로그아웃한 경로의 창 유지
 	}
 
 }

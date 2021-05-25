@@ -1,4 +1,4 @@
-package com.jimin.board7.user;
+package com.jimin.board7.board;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -9,24 +9,27 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.jimin.board7.MyUtils;
 
-
-@WebServlet("/user/join")
-public class UserJoinServlet extends HttpServlet {
+@WebServlet("/board/write")
+public class BoardWriteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		MyUtils.openJSP("join", "user/userJoin", request, response);
+		MyUtils.openJSP("write", "/board/boardWrite", request, response);
+	
 	}
-
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String uid = request.getParameter("uid");
-		String upw = request.getParameter("upw");
-		int gender = MyUtils.getParamInt("gender", request);
-		String unm = request.getParameter("unm");
+		String title = request.getParameter("title");
+		String ctnt = request.getParameter("ctnt");
 		
-		response.sendRedirect("login");
+		int iuser =  MyUtils.getLoginUserPk(request);
+		
+		BoardEntity vo = new BoardEntity();
+		vo.setTitle(title);
+		vo.setCtnt(ctnt);
+		vo.setIuser(iuser);
+//		BoardDAO.글쓰기(vo);
+		request.setAttribute("vo", vo);
 	}
 
 }

@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" href="/res/css/common.css">
 <!-- 결국html로 작업, 문자열을 보내면 주소로 요청보내서 다운로드를 한번 더 함 -->
+<script defer src="/res/js/common.js"></script>
 <title>${requestScope.title}</title>
 </head>
 <body>

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<h1>join</h1>							<!-- on:event -->
+<h1>join</h1>							<!-- on=event -->
 <form id="frm" action="join" method="post" onsubmit="return frmChk();">
 	<div>
 	<input type="text" name="uid" placeholder="id">
@@ -23,3 +23,4 @@
 </form>
 
 <script src="/res/js/userJoin.js"></script>
+<!-- 제일 위에 적으려면 defer src="" -->
