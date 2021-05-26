@@ -28,8 +28,9 @@ public class BoardCmtInsSelServlet extends HttpServlet {
 		List<BoardCmtDomain> list = BoardCmtDAO.selBoardCmtList(param);
 		Gson gson = new Gson();
 		String json = gson.toJson(list);
+
+		response.setCharacterEncoding("UTF-8");
 		response.getWriter().append(json);
-	
 	}
 	
 	//등록
@@ -37,7 +38,7 @@ public class BoardCmtInsSelServlet extends HttpServlet {
 		int iboard = MyUtils.getParamInt("iboard", request);
 		String cmt = request.getParameter("cmt");
 		int iuser = MyUtils.getLoginUserPk(request);
-		
+		System.out.println("iboard : " + iboard);
 		BoardCmtEntity param = new BoardCmtEntity();
 		param.setIboard(iboard);
 		param.setCmt(cmt);
@@ -51,7 +52,6 @@ public class BoardCmtInsSelServlet extends HttpServlet {
 		.append("}")
 		.flush();
 		//응답에 사용 / {"result":1}
-		
 	}
 	
 	}

@@ -1,4 +1,4 @@
-package com.jimin.board7.board;
+package com.jimin.board7.cmt;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -9,27 +9,33 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.jimin.board7.MyUtils;
 
-@WebServlet("/board/write")
-public class BoardWriteServlet extends HttpServlet {
+@WebServlet("/board/cmtDelUpd")
+public class BoardCmtDelUpdServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-   
+     
+	//댓글 삭제
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		MyUtils.openJSP("write", "/board/boardWrite", request, response);
-	
-	}
-	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String title = request.getParameter("title");
-		String ctnt = request.getParameter("ctnt");
+		int icmt = MyUtils.getParamInt("icmt", request);
 		int iuser = MyUtils.getLoginUserPk(request);
+	
+		BoardCmtEntity param = new BoardCmtEntity();
+		param.setIcmt(icmt);
+		param.setIuser(iuser);
 		
-		BoardEntity vo = new BoardEntity();
-		vo.setTitle(title);
-		vo.setCtnt(ctnt);
-		vo.setIuser(iuser);
-		int iboard = BoardDAO.insBoard(vo);
+		int result = BoardCmtDAO.delBoardCmt(param);
 		
-		response.sendRedirect("detail?iboard=" + iboard);
+		//응답
+		response.getWriter()
+		.append("{")
+		.append("\"result\":")
+		.append(String.valueOf(result))
+		.append("}")
+		.flush();
+	}
+
+	//댓글 수정
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 	}
 
 }

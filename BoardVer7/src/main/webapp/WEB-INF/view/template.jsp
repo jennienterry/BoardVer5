@@ -31,6 +31,7 @@
 	<section>
 		<jsp:include page="/WEB-INF/view/${requestScope.page}.jsp"></jsp:include>
 		<!-- <h1>join</h1> 얘네가 여기 들어오는 것 -->
+		<!-- MyUtils의 openJSP에서 설정해준 키값 가져오기 -->
 	</section>
 </body>
 </html>

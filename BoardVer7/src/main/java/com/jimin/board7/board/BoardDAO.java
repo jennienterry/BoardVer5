@@ -9,6 +9,45 @@ import java.util.List;
 import com.jimin.board7.DBUtils;
 
 public class BoardDAO {
+	
+	public static int insBoard(BoardEntity param) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		String sql = "INSERT INTO t_board " + "(title, ctnt, iuser) " + "VALUES " + "(?, ?, ?)";
+
+		String sql2 = "SELECT iboard FROM t_board " + "ORDER BY iboard DESC " + "LIMIT 1";
+
+		try {
+			con = DBUtils.getCon();
+			ps = con.prepareStatement(sql);
+
+			ps.setString(1, param.getTitle());
+			ps.setString(2, param.getCtnt());
+			ps.setInt(3,param.getIuser());
+
+			ps.executeUpdate();
+
+			con.close();
+			ps.close();
+			con = DBUtils.getCon();
+			ps = con.prepareStatement(sql2);
+			rs = ps.executeQuery();
+			int iboard = 0;
+			if (rs.next()) {
+				iboard = rs.getInt("iboard");
+			}
+			return iboard;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+		} finally {
+			DBUtils.close(con, ps);
+		}
+	}
+	
+	
 	public static List<BoardDomain> selBoardList(BoardDTO param){
 		List<BoardDomain> list = new ArrayList();
 		

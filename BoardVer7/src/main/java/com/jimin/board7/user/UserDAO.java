@@ -40,7 +40,8 @@ public class UserDAO {
 		ResultSet rs = null;
 		
 		UserEntity result = null;
-		String sql = " SELECT iuser, uid, upw, unm FROM t_user WHERE uid = ?";
+		String sql = "SELECT iuser, uid, upw, unm "
+				   + "FROM t_user WHERE uid = ?";
 		
 		try {
 			con = DBUtils.getCon();
