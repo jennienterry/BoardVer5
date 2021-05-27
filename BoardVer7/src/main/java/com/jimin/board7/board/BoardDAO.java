@@ -208,4 +208,51 @@ public class BoardDAO {
 		}
 		return result;
 	}
+	
+	public static int modBoard(BoardEntity param) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		
+		String sql = "UPDATE t_board "
+			       + "SET title = ?, ctnt = ? "
+				   + "WHERE iboard = ? ";
+		
+		try {
+			con = DBUtils.getCon();
+			ps = con.prepareStatement(sql);			
+			ps.setString(1, param.getTitle());
+			ps.setString(2, param.getCtnt());
+			ps.setInt(3, param.getIboard());
+			return ps.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBUtils.close(con, ps);
+		}
+		return 0;
+	}
+	
+	
+	
+	public static int delBoard(BoardEntity param) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		
+		String sql = "DELETE FROM t_board "
+				   + "WHERE iboard = ? ";
+		
+		try {
+			con = DBUtils.getCon();
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, param.getIboard());
+			return ps.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBUtils.close(con, ps);
+		}
+		return 0;
+	}
 }

@@ -1,6 +1,7 @@
 var cmtFrmElem = document.querySelector('#cmtFrm');
 var cmtListElem = document.querySelector('#cmtList');
 
+var cmtModModalElem = document.querySelector('#modal');
 function regCmt(){
 	var cmtVal = cmtFrmElem.cmt.value;	//속성명으로 접근(id나 name)
 
@@ -41,7 +42,7 @@ function regAjax(param){
 function getListAjax(){
 	var iboard = cmtListElem.dataset.iboard;
 	
-	fetch('cmtInsSel?iboard=' + iboard)
+	fetch('cmtInsSel?iboard=' + iboard) //설정값이 없으므로 get방식 (a태그 생각하기! 쿼리스트링)
 	.then(function(res){
 		return res.json();
 	})
@@ -97,7 +98,14 @@ function makeCmtElemList(data){
 			
 			//삭제버튼 클릭시
 			delBtn.addEventListener('click', function(){
-				delAjax(item.icmt);	
+				if(confirm('삭제하시겠습니까?')){
+					delAjax(item.icmt);}	
+			});
+			
+			//수정버튼 클릭시
+			modBtn.addEventListener('click', function(){
+				//댓글,수정 모달창 띄우기	
+				openModModal(item);	
 			});
 			
 			delBtn.innerText = '삭제';
@@ -137,4 +145,41 @@ function delAjax(icmt){
 	});
 	
 }
+
+//댓글수정
+function modAjax(){
+	var cmtModFrmElem = document.querySelector('#cmtModFrm');
+	var param = {
+		icmt : cmtModFrmElem.icmt.value,
+		cmt : cmtModFrmElem.cmt.value
+}
+	const init = {
+		method: 'POST',
+		body: new URLSearchParams(param) //URLSearchParams객체가 servlet에서 getparam할수있도록 해준다.
+	};
+	fetch('cmtDelUpd', init) // servlet명, 설정값 / 설정값이 없으면 get방식이 기본
+	.then(function(res){
+		return res.json(); // 객체
+	})
+	.then(function(myJson){	
+		if(myJson.mod == 1){
+			getListAjax();
+			closeModModal();
+		}else{
+			alert('댓글 수정을 실패하였습니다.');
+		}
+	});
+}
+
+function openModModal({icmt, cmt}){
+	cmtModModalElem.className = '';
+	
+	var cmtModFrmElem = document.querySelector('#cmtModFrm');
+	cmtModFrmElem.icmt.value = icmt;
+	cmtModFrmElem.cmt.value = cmt;
+}
+function closeModModal(){
+	cmtModModalElem.className = 'displayNone';
+}
+
 getListAjax(); //이 파일이 임포트되면 함수 1회 호출

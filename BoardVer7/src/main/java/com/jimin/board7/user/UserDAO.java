@@ -40,7 +40,7 @@ public class UserDAO {
 		ResultSet rs = null;
 		
 		UserEntity result = null;
-		String sql = "SELECT iuser, uid, upw, unm "
+		String sql = "SELECT iuser, uid, upw, unm, profileImg "
 				   + "FROM t_user WHERE uid = ?";
 		
 		try {
@@ -53,11 +53,14 @@ public class UserDAO {
 				String uid = rs.getString("uid");
 				String upw = rs.getString("upw");
 				String unm = rs.getString("unm");
+				String profileimg = rs.getString("profileImg");
+				
 				result = new UserEntity();
 				result.setIuser(iuser);
 				result.setUid(uid);
 				result.setUpw(upw);
 				result.setUnm(unm);	
+				result.setProfileImg(profileimg);
 			}
 			//아이디 있으면 값 담아서 가고, 없으면 null 반환
 			return result;
@@ -94,6 +97,31 @@ public class UserDAO {
 		} finally {
 			DBUtils.close(con, ps);
 		}
+		
+	}
+	
+	public static int updProfileImg(UserEntity param) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		
+		String sql = "UPDATE t_user "
+				   + "SET profileImg = ? " 
+				   + "WHERE iuser = ?";
+		
+		try {
+			con = DBUtils.getCon();
+			ps = con.prepareStatement(sql);
+			ps.setString(1, param.getProfileImg());			
+			ps.setInt(2, param.getIuser());			
+			return ps.executeUpdate();
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+		} finally {
+			DBUtils.close(con, ps);
+		}
+	
 		
 	}
 }

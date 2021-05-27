@@ -17,7 +17,7 @@ public class BoardCmtDAO {
 		String sql = "INSERT INTO t_board_cmt "
 				   + "(iboard, iuser, cmt) "
 				   + "VALUES "
-				   + "(?,?,?)";
+				   + "(?, ?, ?)";
 		
 		try{
 			con = DBUtils.getCon();
@@ -96,4 +96,31 @@ public class BoardCmtDAO {
 					DBUtils.close(con, ps);
 				} return 0;
 	}
+
+	
+	public static int modBoardCmt(BoardCmtEntity param) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		
+		String sql = "UPDATE t_board_cmt "
+				   + "SET cmt = ? "
+				   + "WHERE iuser = ? AND icmt = ?";
+				
+				try {
+					con = DBUtils.getCon();
+					ps = con.prepareStatement(sql);
+					ps.setString(1, param.getCmt());
+					ps.setInt(2, param.getIuser());
+					ps.setInt(3, param.getIcmt());
+					return ps.executeUpdate();
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				} finally {
+					DBUtils.close(con, ps);
+				} return 0;
+	}
 }
+
+
+
