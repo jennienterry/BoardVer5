@@ -40,7 +40,7 @@ public class UserDAO {
 		ResultSet rs = null;
 		
 		UserEntity result = null;
-		String sql = "SELECT iuser, uid, upw, unm, profileImg "
+		String sql = "SELECT iuser, uid, upw, unm, profileimg "
 				   + "FROM t_user WHERE uid = ?";
 		
 		try {
@@ -53,7 +53,7 @@ public class UserDAO {
 				String uid = rs.getString("uid");
 				String upw = rs.getString("upw");
 				String unm = rs.getString("unm");
-				String profileimg = rs.getString("profileImg");
+				String profileimg = rs.getString("profileimg");
 				
 				result = new UserEntity();
 				result.setIuser(iuser);
@@ -120,8 +120,37 @@ public class UserDAO {
 			return 0;
 		} finally {
 			DBUtils.close(con, ps);
-		}
+		}	
+	}
 	
+	
+	public static int updUser(UserEntity param) { //비밀번호 변경과 프로필이미지 변경시 둘다 사용가능
+		Connection con = null;
+		PreparedStatement ps = null;
+		String updString = null;
 		
+		String sql = "UPDATE t_user SET ";
+		if(param.getUpw() != null && !param.getUpw().equals("")){
+			sql += "upw = ? ";
+			updString = param.getUpw();
+		} else if (param.getProfileImg() != null && !param.getProfileImg().equals("")) {
+			sql += "profileImg = ? ";
+			updString = param.getProfileImg();
+			
+		} sql += "WHERE iuser = ? ";
+		
+		try {
+			con = DBUtils.getCon();
+			ps = con.prepareStatement(sql);
+			ps.setString(1, updString);			
+			ps.setInt(2, param.getIuser());			
+			return ps.executeUpdate();
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+		} finally {
+			DBUtils.close(con, ps);
+		}	
 	}
 }
