@@ -6,7 +6,8 @@ var updFrmElem = document.querySelector('#updFrm');
 function delCmt(iboard, icmt) {
 	console.log(`iboard: ${iboard}, icmt: ${icmt}`)
 	//``EL식 아님, javascript문법임
-	// " " + 와 같은 효과
+	// "" + 와 같은 효과
+	// ""를 쓰면 "" + ~ + "" 해야하는데 `백쿼트`를 쓰면 + 없이 나열하면 된다.
 	if (confirm('삭제하시겠습니까?')) {
 		location.href = `/board/cmt?icmt=${icmt}&iboard=${iboard}`;
 	}
