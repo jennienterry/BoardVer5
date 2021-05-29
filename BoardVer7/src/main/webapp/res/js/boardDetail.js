@@ -2,11 +2,12 @@ var cmtFrmElem = document.querySelector('#cmtFrm');
 var cmtListElem = document.querySelector('#cmtList');
 
 var cmtModModalElem = document.querySelector('#modal');
+
 function regCmt(){
-	var cmtVal = cmtFrmElem.cmt.value;	//속성명으로 접근(id나 name)
+	var cmtVal = cmtFrmElem.cmt.value;	//. = 속성명으로 접근(id나 name)
 
 	var param = {
-		iboard: cmtListElem.dataset.iboard,
+		iboard: cmtListElem.dataset.iboard, // data-iboard 속성의 값
 		cmt: cmtVal
 	};
 	regAjax(param);
@@ -16,9 +17,9 @@ function regCmt(){
 function regAjax(param){
 	const init = {
 		method: 'POST',
-		body: new URLSearchParams(param)
+		body: new URLSearchParams(param) //URLSearchParams : 서블릿에서 파라미터로 받을 수 있도록 해주는 것
 	};
-	
+		// cmtInsSel : 서블렛주소
 	fetch('cmtInsSel', init)
 	.then(function(res){
 		return res.json();

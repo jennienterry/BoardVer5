@@ -33,7 +33,7 @@ public class BoardCmtInsSelServlet extends HttpServlet {
 		response.getWriter().append(json);
 	}
 	
-	//등록
+	//등록 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int iboard = MyUtils.getParamInt("iboard", request);
 		String cmt = request.getParameter("cmt");

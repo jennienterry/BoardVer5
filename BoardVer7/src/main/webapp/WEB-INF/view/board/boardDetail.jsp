@@ -15,13 +15,13 @@
 	<a href="/board/mod?iboard=${param.iboard}"><button>수정</button></a>
 	</div>
 	<c:if test="${not empty sessionScope.loginUser}">
-	<div>			   <!-- onsubmit : submit눌렀을 때 return 안되도록 -->
+	<div>			   <!-- onsubmit="return false" : submit눌렀을 때 서블렛으로 안가도록 /Ajax실행해야하기 때문에(String만 가져와야해서) -->
 		<form id="cmtFrm" onsubmit="return false;">
 			<input type="text" id="cmt">
 			<input type="button" value="댓글달기" onclick="regCmt();">
 		</form>
 	</div>
-	</c:if>  	<!-- data를 set할 때는 대문자 x -->
+	</c:if>  	<!-- data-를 set할 때는 대문자 x -->
 	<div id="cmtList" data-login_user_pk="${sessionScope.loginUser.iuser}" data-iboard="${param.iboard}"></div>
 	
 	<div id="modal" class="displayNone">

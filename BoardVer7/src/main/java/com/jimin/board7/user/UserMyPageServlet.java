@@ -59,7 +59,8 @@ public class UserMyPageServlet extends HttpServlet {
 			// = Strint ext2 = fileNm.substring(fileNm.lastIndexOf("."));
 
 			String newFileNm = UUID.randomUUID().toString() + ext; // UUID string으로 변환 ?????
-
+			//랜덤의 문자열을 만들어주는데 중복될일이 없기 때문에 만들어주는 것
+			
 			File imgFile = new File(uploadPath + "/temp" + "/" + fileNm);
 			imgFile.renameTo(new File(targetFolder + "/" + newFileNm));
 

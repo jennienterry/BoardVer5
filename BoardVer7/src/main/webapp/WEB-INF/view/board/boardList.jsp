@@ -23,15 +23,27 @@
 					</c:otherwise>
 				</c:choose>
 			</td>
+			
+			<c:choose>
+					<c:when test="${empty i.profileImg}">
+						<c:set var="img" value="/res/img/noprofile.jpg"/>
+					</c:when>
+					<c:otherwise>
+						<c:set var="img" value="/res/img/user/${i.iuser}/${i.profileImg}"/>
+					</c:otherwise>
+				</c:choose>
 			<td>
+			<img src="${img}" class="profileImg">
 			<c:choose>
 					<c:when test="${param.searchType eq 4}">
 					${i.writerNm.replace(param.searchText, '<mark>' += param.searchText += '</mark>')}
 					</c:when>
 					<c:otherwise>
 						${i.writerNm}
+					
 					</c:otherwise>
-				</c:choose>
+				</c:choose>	
+				
 			</td>
 			<td>${i.regdt}</td>
 		</tr>

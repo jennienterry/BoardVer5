@@ -57,7 +57,7 @@ public class BoardDAO {
 		
 		String sql = "SELECT "
 				   + "A.iboard, A.title, A.iuser, A.regdt "
-				   + ", B.unm AS writerNm "
+				   + ", B.unm AS writerNm, B.profileImg "
 				   + "FROM t_board A "
 				   + "INNER JOIN t_user B "
 				   + "ON A.iuser = B.iuser ";
@@ -98,6 +98,7 @@ public class BoardDAO {
 				vo.setIuser(rs.getInt("iuser"));
 				vo.setRegdt(rs.getString("regdt"));
 				vo.setWriterNm(rs.getString("writerNm"));
+				vo.setProfileImg(rs.getString("profileImg"));
 				list.add(vo);
 			}
 		} catch (Exception e) {
