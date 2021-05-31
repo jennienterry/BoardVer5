@@ -17,7 +17,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css
 
 <body>
 	<h1>디테일</h1>
-	<div>
+	<div> <!--a태그는 주소이동이니까 servlet명으로-->
 		<a href="list">리스트로 돌아가기</a>
 	</div>
 	<div>글번호 : ${param.iboard}</div>
@@ -38,7 +38,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css
 		<a href="delete?iboard=${param.iboard}"><button>삭제</button></a>
 	</c:if>
 	<h3>댓글</h3>
-		<div>
+		<div>					
 			<form id="insFrm" action="cmt" method="post">	
 			<input type="hidden" name="icmt" value="0">
 				<input type="hidden" name="iboard" value="${param.iboard}">

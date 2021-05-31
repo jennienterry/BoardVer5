@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="mitv" class="com.spring.first.MiTv">
+	<!-- <constructor-arg ref="speaker"></constructor-arg> -->
+	<property name="speaker" ref="speaker"></property>
+	</bean>
+	
+	<bean id="speaker" class="com.spring.first.AppleSpeaker">
+		<constructor-arg value="30"></constructor-arg>
+	</bean>
+	<bean id="speaker2" class="com.spring.fifirst.AppleSpeaker">
+		<constructor-arg value="40"></constructor-arg>
+	</bean>
+	<!-- XML : 열었으면 닫는다. -->
+	<!-- bean 등록 : 객체를 관리해줘 
+	MiTv 객체화 하는건 Spring, scope 속성의 값에 따라 싱글톤(기본값)인지 아닌지(prototype) 설정할 수 있다.
+	bean에서 lazy-init 속성값을 "true"로 설정해 놓으면 getBean할 떄 객체화시킨다.
+	Spring은 설정파일로 기동시킨다. (기동파일)
+	설정파일에는 스프링에 맡기고 싶은 객체 정보를 bean등록한다. 내가 스프링에 요청할 때 마다 객체화한 애의 주소값을 준다.
+	constructor-arg : 생성자의 매개변수르 넣을 값 설정(리터럴일 때는 value, 참조변수(객체)일 때는 ref로)
+	property : 객체의 멤버필드에 값 설정 (setter메소드)
+	
+	이렇게 만들면 안쪽의 코드 수정 없이 Apple 스피커를 Haman 스피커로 바꿀 수 있다. xml은 컴파일이 필요없음
+	 -->
+	<!-- scope="singleton"이 기본, prototype / lazy-init="true" 객체화를 안하도록 함 -->
+
+</beans>
